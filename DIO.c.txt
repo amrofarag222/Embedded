@@ -1,0 +1,92 @@
+#include <avr/io.h>
+#include "std_type.h"
+#include "bit_math.h"
+#include "DIO.h"
+
+void DIO_voidSetPortDirection(u8 PortId, u8 Direction) {
+    if (Direction == 1) {
+        switch (PortId) {
+            case DIO_PORTA: DDRA = 0xFF; break;
+            case DIO_PORTB: DDRB = 0xFF; break;
+            case DIO_PORTC: DDRC = 0xFF; break;
+            case DIO_PORTD: DDRD = 0xFF; break;
+        }
+    } else if (Direction == 0) {
+        switch (PortId) {
+            case DIO_PORTA: DDRA = 0x00; break;
+            case DIO_PORTB: DDRB = 0x00; break;
+            case DIO_PORTC: DDRC = 0x00; break;
+            case DIO_PORTD: DDRD = 0x00; break;
+        }
+    }
+}
+
+void DIO_voidSetPortValue(u8 PortId, u8 Value) {
+    if (Value == 1) {
+        switch (PortId) {
+            case DIO_PORTA: PORTA = 0xFF; break;
+            case DIO_PORTB: PORTB = 0xFF; break;
+            case DIO_PORTC: PORTC = 0xFF; break;
+            case DIO_PORTD: PORTD = 0xFF; break;
+        }
+    } else if (Value == 0) {
+        switch (PortId) {
+            case DIO_PORTA: PORTA = 0x00; break;
+            case DIO_PORTB: PORTB = 0x00; break;
+            case DIO_PORTC: PORTC = 0x00; break;
+            case DIO_PORTD: PORTD = 0x00; break;
+        }
+    }
+}
+
+void DIO_voidSetPinDirection(u8 PortId, u8 PinId, u8 Direction) {
+    if (Direction == 1) {
+        switch (PortId) {
+            case DIO_PORTA: SET_BIT(DDRA, PinId); break;
+            case DIO_PORTB: SET_BIT(DDRB, PinId); break;
+            case DIO_PORTC: SET_BIT(DDRC, PinId); break;
+            case DIO_PORTD: SET_BIT(DDRD, PinId); break;
+        }
+    } else if (Direction == 0) {
+        switch (PortId) {
+            case DIO_PORTA: CLR_BIT(DDRA, PinId); break;
+            case DIO_PORTB: CLR_BIT(DDRB, PinId); break;
+            case DIO_PORTC: CLR_BIT(DDRC, PinId); break;
+            case DIO_PORTD: CLR_BIT(DDRD, PinId); break;
+        }
+    }
+}
+
+void DIO_voidSetPinValue(u8 PortId, u8 PinId, u8 Value) {
+    if (Value == 1) {
+        switch (PortId) {
+            case DIO_PORTA: SET_BIT(PORTA, PinId); break;
+            case DIO_PORTB: SET_BIT(PORTB, PinId); break;
+            case DIO_PORTC: SET_BIT(PORTC, PinId); break;
+            case DIO_PORTD: SET_BIT(PORTD, PinId); break;
+        }
+    } else if (Value == 0) {
+        switch (PortId) {
+            case DIO_PORTA: CLR_BIT(PORTA, PinId); break;
+            case DIO_PORTB: CLR_BIT(PORTB, PinId); break;
+            case DIO_PORTC: CLR_BIT(PORTC, PinId); break;
+            case DIO_PORTD: CLR_BIT(PORTD, PinId); break;
+        }
+    }
+}
+
+u8 DIO_u8GetPinValue(u8 PortId, u8 PinId) {
+    u8 local_u8Val = 0;
+    if (PortId <= DIO_PORTD && PinId <= DIO_PIN7) {
+        switch (PortId) {
+            case DIO_PORTA: local_u8Val = GET_BIT(PINA, PinId); break;
+            case DIO_PORTB: local_u8Val = GET_BIT(PINB, PinId); break;
+            case DIO_PORTC: local_u8Val = GET_BIT(PINC, PinId); break;
+            case DIO_PORTD: local_u8Val = GET_BIT(PIND, PinId); break;
+        }
+    }
+    return local_u8Val;
+}
+
+
+
