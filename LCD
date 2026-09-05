@@ -1,0 +1,17 @@
+ * Author : Amro Farag
+ */ 
+
+#include <avr/io.h>
+#include "LCD.h"
+#include <util/delay.h>
+int main(void)
+{	
+	LCD_init();
+	LCD_sendString("Amro Farag");
+    /* Replace with your application code */
+    while (1) 
+    {
+		
+
+    }
+}
